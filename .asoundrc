@@ -1,0 +1,40 @@
+# ---------------
+# Binaural listen
+# ---------------
+pcm.headphones {
+	type plug
+	slave.pcm "ladspa"
+}
+ 
+pcm.ladspa {
+	type ladspa
+	slave.pcm "plughw:0,0";
+	path "/usr/lib/ladspa";
+	plugins [
+	{
+		label bs2b
+		input {
+			controls [ 700 4.5 ]
+		}
+	 }
+  ]
+}
+
+
+# ---------
+# Equalizer
+# ---------
+ctl.equal {
+	  type equal;
+}
+
+pcm.plugequal {
+	  type equal;
+	  slave.pcm "plughw:1,0";
+}
+
+# -------
+# Default
+# -------
+pcm.!default { type hw card Intel }
+ctl.!default { type hw card Intel }
