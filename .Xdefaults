@@ -1,0 +1,46 @@
+! ------------------------------------------------------
+! file:     /home/ramonoid/.Xdefaults
+! author:   Ramon Solis - http://cyb3rpunk.wordpress.com
+! modified: February 2011
+! vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=xdefaults:
+! ------------------------------------------------------
+        
+! ----
+! Font
+! ----
+URxvt*font:          -erus-erusfont-medium-r-normal--11-80-100-100-c-60-iso10646-1
+URxvt*boldFont:      -erus-erusfont-bold-r-normal--11-80-100-100-c-60-iso10646-1
+
+! -------
+! Colours
+! -------
+#include "/home/ramonoid/.xcolours/marzo"
+
+! -----------------
+! Fake transparency
+! -----------------
+URxvt.transparent: true
+URxvt.shading: 10
+
+! ---------
+! Open URLs
+! ---------
+URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
+URxvt.underlineURLs: true
+URxvt.perl-lib:      /home/ramonoid/.urxvt
+URxvt.perl-ext:      selection,mark-yank-urls
+URxvt*urlLauncher:   /usr/bin/uzbl-tabbed
+URxvt.colorUL:       #86a2be
+
+! ------------
+! Misc options 
+! ------------
+URxvt.termName:          rxvt-256color
+URxvt*urgentOnBell:      true
+URxvt*visualBell:        true
+URxvt*skipBuiltinGlyphs: true
+URxvt*borderless:        true 
+URxvt*scrollBar:         false
+URxvt*saveLines:         666
+URxvt.buffered:          true
+URxvt.iconFile:          /usr/share/pixmaps/rxvt-unicode.png
