@@ -1,0 +1,125 @@
+# ------------------------------------------------------
+# file:     $HOME/.zsh_aliases
+# author:   Ramon Solis - http://cyb3rpunk.wordpress.com
+# modified: February 2011
+# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=sh:
+# ------------------------------------------------------
+
+# ------------
+# emerge stuff
+# ------------
+alias unmerge='sudo emerge --unmerge'
+alias gupdate='sudo emerge --update --deep --newuse world'
+alias gsearch='sudo emerge --search'
+alias vp='sudo emerge -vp'
+alias ginstall='sudo emerge -av'
+
+# -----------
+# Mount stuff 
+# -----------
+alias sonyb='sudo mount /dev/sdb1 /media -o umask=022,rw,uid=1000'
+alias windos='sudo mount -t ntfs-3g /dev/sda1 /mnt/windos'
+alias ehd='sudo mount -t ntfs-3g /dev/sdb1 /mnt/drive'
+alias cdrive='sudo mount /dev/sr0 /mnt/cdrom/'
+alias walkman='mount /media && cd /media/MUSIC/ && ls'
+alias um1='sudo umount /media'
+alias um2='sudo umount /mnt/drive'
+
+# -----
+# Music
+# -----
+alias ncm='ncmpcpp'
+alias mix='alsamixer'
+alias eq='alsamixer -D equal'
+alias sjack='qjackctl -start'
+
+# --------------------
+# Auto extension stuff
+# --------------------
+alias -s {html,php,com,net,org,gov}=$BROWSER
+alias -s {txt,py,rb,log}=$EDITOR
+alias -s {jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}='feh'
+alias -s {mpg,mpeg,avi,ogm,ogv,wmv,m4v,mp4,mov,f4v,mkv}='mplayer'
+alias -s {mp3,ogg,wav,flac}='mplayer'
+alias -s {odt,doc,docx,ppt,pptx,xls,xlsx,rtf}='libreoffice'
+alias -s {rar,zip,7z,tar,gz,bz2}='ext'
+alias -s torrent='rtorrent'
+alias -s pdf='zathura'
+
+# ----------------------------
+# ls, cp and that classic shit
+# ----------------------------
+alias ls='ls --color=auto'
+alias lsa='ls -a --group-directories-first'
+alias lsl='ls -l -h -F --group-directories-first'
+alias cp='cp -vi'
+alias cpd='cp -r'
+alias mv='mv -v'
+alias rmd='rm -r'
+alias cpr='rsync -aP'
+alias ~='cd $HOME && clear'
+alias ..='..'
+alias ..2='../..'
+alias ..3='../../..'
+alias ..4='../../../..'
+alias ..5='../../../../..'
+
+# ----
+# Apps
+# ----
+alias irb='irb --prompt-mode simple'
+alias bitlbee='irssi -c im.uk.bitlbee.org'
+alias freenode='irssi -c irc.freenode.org'
+alias tab='urxvtc -pe tabbed'
+alias urt='ka unclutter; cd $HOME/Juegos/UrbanTerror && ./ioUrbanTerror.i386'
+alias mplayer='mplayer -msgcolor -msgmodule'
+
+# ----
+# Misc
+# ----
+alias go='startx'
+alias ka='killall'
+alias :q='exit'
+alias :Q=':q'
+alias apaga='xset dpms force off'
+alias 60='sudo shutdown -h +60'
+alias 120='sudo shutdown -h +120'
+alias f='find | grep'
+alias less=$PAGER
+alias TV="xrandr --newmode "1360x800_60.00" 88.25 1360 1432 1568 1776 800 803 813 831 -hsync +vsync; xrandr --addmode VGA1 "1360x800_60.00"; xrandr --output VGA1 --mode "1360x800_60.00""
+
+# --------------
+# Global aliases 
+# --------------
+alias -g L='| less' 
+alias -g G='| grep -in --color=auto'
+alias -g R='&> /dev/null &'
+alias -g T='| tail -23'
+alias -g W='| wc -l'
+alias -g H='| head'
+alias -g Hl='| --help'
+
+# ---
+# Net
+# ---
+alias ipe='echo $(curl -s http://www.whatismyip.com/automation/n09230945.asp)'
+alias p='ping dukgo.com'
+
+# ------------
+# Common files
+# ------------
+alias sv='sudo vim'
+alias vzsh='vim $HOME/.zshrc'
+alias vxde='vim $HOME/.Xdefaults'
+alias val='vim $HOME/.zsh_aliases'
+alias vxin='vim $HOME/.xinitrc'
+alias vv='vim $HOME/.vimrc'
+alias vwmfs='vim $HOME/.config/wmfs/wmfsrc'
+alias use='sv /etc/portage/package.use'
+alias keyw='sv /etc/portage/package.keywords'
+
+# -------
+# Git-Hub
+# -------
+alias gup="cd $HOME/.dotfiles; git add .; git commit -m 'updating dotfiles'; git push origin master"
+alias dtdn="cd $HOME/.dotfiles; git pull origin master"

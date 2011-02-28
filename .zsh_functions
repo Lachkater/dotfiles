@@ -1,0 +1,97 @@
+# ------------------------------------------------------
+# file:     $HOME/.zsh_functions
+# author:   Ramon Solis - http://cyb3rpunk.wordpress.com
+# modified: February 2011
+# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=sh:
+# ------------------------------------------------------
+
+# Copy and Move
+goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
+cpf() { cp "$@" && goto "$_" && ls -l G "$1" }
+mvf() { mv "$@" && goto "$_"; }
+
+# Make thumbnails
+thumb() {
+    convert -resize 250x250 "*.${1}" "*-thumb.${1}"
+}
+
+# Chown
+mkmine() { sudo chown -R ${USER}:${USER} ${1:-.}; }
+
+# Extract files
+ext () {
+	if [ -f $1 ] ; then
+	   case $1 in
+		*.tar.bz2) tar xvjf $1 ;;
+		*.tar.gz) tar xvzf $1 ;;
+		*.bz2) bunzip2 $1 ;;
+		*.rar) unrar x $1 ;;
+		*.gz) gunzip $1 ;;
+		*.tar) tar xvf $1 ;;
+		*.tbz2) tar xvjf $1 ;;
+		*.tgz) tar xvzf $1 ;;
+		*.zip) unzip $1 ;;
+		*.Z) uncompress $1 ;;
+		*.7z) 7z x $1 ;;
+		*) echo “don’t know how to extract ‘$1′…” ;;
+	    esac
+	else
+		echo “‘$1′ is not a valid file!”
+	fi
+}
+
+# Copy with pseudo status bar
+cp_p()
+{
+   strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
+      | awk '{
+        count += $NF
+            if (count % 10 == 0) {
+               percent = count / total_size * 100
+               printf "%3d%% [", percent
+               for (i=0;i<=percent;i++)
+                  printf "="
+               printf ">"
+               for (i=percent;i<100;i++)
+                  printf " "
+               printf "]\r"
+            }
+         }
+         END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
+}
+
+# run command detached from terminal and without output
+nh() {
+   nohup "$@" &>/dev/null &
+}
+
+# Copy with pseudo status bar and more
+cp_p2() { if [ `echo "$2" | grep ".*\/$"` ]; then pv "$1" > "$2""$1"; else pv "$1" > "$2"/"$1"; fi;     }
+
+# Presets for alsaequal
+seteq(){
+    amixer -D equal -q set '01. 31 Hz' $1
+    amixer -D equal -q set '02. 63 Hz' $2 
+    amixer -D equal -q set '03. 125 Hz' $3 
+    amixer -D equal -q set '04. 250 Hz' $4 
+    amixer -D equal -q set '05. 500 Hz' $5 
+    amixer -D equal -q set '06. 1 kHz' $6 
+    amixer -D equal -q set '07. 2 kHz' $7 
+    amixer -D equal -q set '08. 4 kHz' $8 
+    amixer -D equal -q set '09. 8 kHz' $9 
+    amixer -D equal -q set '10. 16 kHz' ${10} 
+} 
+
+Speakers()    { seteq 80 70 65 60 60 60 60 80 80 80 }
+Notebook()     { seteq 00 75 75 70 50 50 60 70 85 85 }
+Disable()   { seteq 66 66 66 66 66 66 66 66 66 66 }
+
+# Convert flac files to lo-fi quality
+flaclofi(){
+    flac -c -d $1 | lame -m m -s 22.05 -b 56 -q 9 --lowpass 8 - $2
+}
+
+# Convert flac files to mp3 "decent" quality
+flacmp3(){
+    flac2mp3 -b none -l "-V 0" $1
+}
