@@ -1,7 +1,7 @@
 # ------------------------------------------------------
 # file:     $HOME/.zsh_functions
 # author:   Ramon Solis - http://cyb3rpunk.wordpress.com
-# modified: February 2011
+# modified: April 2011
 # vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=sh:
 # ------------------------------------------------------
 
@@ -69,7 +69,7 @@ nh() {
 cp_p2() { if [ `echo "$2" | grep ".*\/$"` ]; then pv "$1" > "$2""$1"; else pv "$1" > "$2"/"$1"; fi;     }
 
 # Presets for alsaequal
-seteq(){
+seteq() {
     amixer -D equal -q set '01. 31 Hz' $1
     amixer -D equal -q set '02. 63 Hz' $2 
     amixer -D equal -q set '03. 125 Hz' $3 
@@ -87,11 +87,35 @@ Notebook()     { seteq 00 75 75 70 50 50 60 70 85 85 }
 Disable()   { seteq 66 66 66 66 66 66 66 66 66 66 }
 
 # Convert flac files to lo-fi quality
-flaclofi(){
+flaclofi() {
     flac -c -d $1 | lame -m m -s 22.05 -b 56 -q 9 --lowpass 8 - $2
 }
 
 # Convert flac files to mp3 "decent" quality
-flacmp3(){
+flacmp3() {
     flac2mp3 -b none -l "-V 0" $1
+}
+
+# Config files
+conf () {
+        case $1 in
+            use)        sudo $EDITOR /etc/portage/package.use ;;
+            keyw)       sudo $EDITOR /etc/portage/package.keywords ;;
+            fstab)      sudo $EDITOR /etc/fstab ;;
+            wmfs)       $EDITOR $HOME/.config/wmfs/wmfsrc ;;
+            mpd)        $EDITOR $HOME/.mpd/mpd.config ;;
+            vim)        $EDITOR $HOME/.vimrc ;;
+            zsh)        $EDITOR $HOME/.zshrc ;;
+            alias)      $EDITOR $HOME/.zsh_aliases ;;
+            func)       $EDITOR $HOME/.zsh_functions ;;
+            xdef)       $EDITOR $HOME/.Xdefaults ;;
+            xin)        $EDITOR $HOME/.xinitrc ;;
+            ncm)        $EDITOR $HOME/.ncmpcpp/config ;;
+            alsa)       $EDITOR $HOME/.asoundrc ;;
+            *)          if [ -f "$1" ]; then 
+                            $EDITOR $1 
+                        else 
+                            echo "Invalid Option" 
+                        fi ;;
+        esac
 }

@@ -1,7 +1,7 @@
 # ------------------------------------------------------
 # file:     $HOME/.zshrc
 # author:   Ramon Solis - http://cyb3rpunk.wordpress.com
-# modified: February 2011
+# modified: April 2011
 # vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=sh:
 # ------------------------------------------------------
 
@@ -39,6 +39,7 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 # Paths
 # -----
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin:$HOME/Scripts:$PATH"
+export CDPATH="$HOME/:/usr/share:$HOME/Apps:$HOME/Musica/:$HOME/Texto/ITT/8vo/"
 
 # ------
 # Colors
@@ -78,10 +79,10 @@ export EDITOR='/usr/bin/vim'       \
        BROWSER='/usr/bin/opera'    \
        SHELL='/bin/zsh'            \
        MANPAGER='/usr/bin/vimmanpager' \
-       LANG='en_US.utf8'           \
        LC_ALL='en_US.utf8'         \
        LC='en_US.utf8'             \
        LESSCHARSET='utf-8'         \
+       LANG='en_US.utf8'           \
 
 # --------------------------
 # Load aliases and functions
@@ -112,7 +113,7 @@ bindkey "^f" forward-word
 # -----------------------
 # Colors in TTY (Zenburn)
 # -----------------------
-if [[ $TERM == "linux" ]]; then
+if [[ ${TERM} == "linux" && ${+DISPLAY} == 0 ]]; then
 echo -en "\e]P01e2320" # zen-black (norm. black)
 echo -en "\e]P8709080" # zen-bright-black (norm. darkgrey)
 echo -en "\e]P1705050" # zen-red (norm. darkred)
@@ -229,4 +230,4 @@ else
     PROMPT=$'%{\e[0;34m%}%B[%b%{\e[0m%}%~%{\e[0;34m%}%B]%b%{\e[0;34m%}>%{\e[0m%} '
 fi
 
-################################# Based on http://bbs.archlinux.org/viewtopic.php?pid=549482#p549482 
+### Based on http://aperiodic.net/phil/prompt/ 

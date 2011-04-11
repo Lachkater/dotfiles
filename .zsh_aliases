@@ -1,7 +1,7 @@
 # ------------------------------------------------------
 # file:     $HOME/.zsh_aliases
 # author:   Ramon Solis - http://cyb3rpunk.wordpress.com
-# modified: February 2011
+# modified: April 2011
 # vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=sh:
 # ------------------------------------------------------
 
@@ -9,10 +9,13 @@
 # emerge stuff
 # ------------
 alias unmerge='sudo emerge --unmerge'
-alias gupdate='sudo emerge --update --deep --newuse world'
+alias gupdate='sudo emerge --update --deep --ask --newuse world'
 alias gsearch='sudo emerge --search'
 alias vp='sudo emerge -vp'
 alias ginstall='sudo emerge -av'
+alias gsync='sudo emerge --sync'
+alias gclean='sudo emerge -p --depclean'
+alias gdep='sudo emerge -vp --depclean'
 
 # -----------
 # Mount stuff 
@@ -21,9 +24,10 @@ alias sonyb='sudo mount /dev/sdb1 /media -o umask=022,rw,uid=1000'
 alias windos='sudo mount -t ntfs-3g /dev/sda1 /mnt/windos'
 alias ehd='sudo mount -t ntfs-3g /dev/sdb1 /mnt/drive'
 alias cdrive='sudo mount /dev/sr0 /mnt/cdrom/'
-alias walkman='mount /media && cd /media/MUSIC/ && ls'
+alias walkman='mount /media && ls /media/MUSIC/ && cd $HOME/Musica/'
 alias um1='sudo umount /media'
 alias um2='sudo umount /mnt/drive'
+alias um3='sudo umount /mnt/windos'
 
 # -----
 # Music
@@ -51,7 +55,7 @@ alias -s pdf='zathura'
 # ----------------------------
 alias ls='ls --color=auto'
 alias lsa='ls -a --group-directories-first'
-alias lsl='ls -l -h -F --group-directories-first'
+alias lsl='ls -lhF --group-directories-first'
 alias cp='cp -vi'
 alias cpd='cp -r'
 alias mv='mv -v'
@@ -73,6 +77,7 @@ alias freenode='irssi -c irc.freenode.org'
 alias tab='urxvtc -pe tabbed'
 alias urt='ka unclutter; cd $HOME/Juegos/UrbanTerror && ./ioUrbanTerror.i386'
 alias mplayer='mplayer -msgcolor -msgmodule'
+alias sv='sudo vim'
 
 # ----
 # Misc
@@ -96,27 +101,14 @@ alias -g G='| grep -in --color=auto'
 alias -g R='&> /dev/null &'
 alias -g T='| tail -23'
 alias -g W='| wc -l'
-alias -g H='| head'
-alias -g Hl='| --help'
+alias -g He='| head'
+alias -g H='| --help '
 
 # ---
 # Net
 # ---
 alias ipe='echo $(curl -s http://www.whatismyip.com/automation/n09230945.asp)'
-alias p='ping dukgo.com'
-
-# ------------
-# Common files
-# ------------
-alias sv='sudo vim'
-alias vzsh='vim $HOME/.zshrc'
-alias vxde='vim $HOME/.Xdefaults'
-alias val='vim $HOME/.zsh_aliases'
-alias vxin='vim $HOME/.xinitrc'
-alias vv='vim $HOME/.vimrc'
-alias vwmfs='vim $HOME/.config/wmfs/wmfsrc'
-alias use='sv /etc/portage/package.use'
-alias keyw='sv /etc/portage/package.keywords'
+alias p='ping gentoo.org'
 
 # -------
 # Git-Hub
